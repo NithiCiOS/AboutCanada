@@ -45,7 +45,7 @@ class CanadaInfoCell: UITableViewCell {
     
     func setupImageView() {
         addSubview(thumpImageView)
-        thumpImageView.backgroundColor = .red
+        thumpImageView.backgroundColor = .lightGray
         thumpImageView.setupAnchors(
             top: self.topAnchor,
             leading: self.leadingAnchor,
@@ -53,11 +53,11 @@ class CanadaInfoCell: UITableViewCell {
             size: .init(width: 50, height: 50)
         )
         thumpImageView.layer.cornerRadius = 25
+        thumpImageView.image = UIImage(named: "placeholder")
     }
     
     func setupTitleLabel() {
         addSubview(titleLabel)
-        // titleLabel.backgroundColor = .red
         titleLabel.setupAnchors(
             top: thumpImageView.topAnchor,
             trailing: self.trailingAnchor,
@@ -76,12 +76,12 @@ class CanadaInfoCell: UITableViewCell {
             leading: titleLabel.leadingAnchor,
             padding: .init(top: 5, left: 0, bottom: 30, right: 0)
         )
-        // descriptionLabel.backgroundColor = .blue
     }
     
     
     var canadaDetail: CanadaDetail? {
         didSet {
+            self.thumpImageView.getImage(from: canadaDetail?.imageHref)
             self.titleLabel.text = canadaDetail?.title
             self.descriptionLabel.text = canadaDetail?.rowDescription
         }

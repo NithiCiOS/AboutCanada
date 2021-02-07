@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol NetworkServiceInterface {
     init(session: NetworkSession)
@@ -22,12 +23,18 @@ extension NetworkServiceInterface {
 /// Intead of singleton, it's better to prepare service layer as `struct`.
 /// So that we can avoid memory foot prints of the layer, throughout the application.
 struct NetworkService: NetworkServiceInterface {
+    
+    /// `NetworkSession` represents the session type.
     private let session: NetworkSession
     
+    /// Initializer
+    /// - Parameter session: `NetworkSession` to perform the request.
     init(session: NetworkSession) {
         self.session = session
     }
     
+    /// Network API call to to get the information about Canada.
+    /// - Parameter completion: A closure that have the completion of `AboutCanada` model.
     func getAboutCanada(completion: @escaping ((AboutCanada?) -> Void)) {
         guard
             let urlRequest = NetworkRequest.aboutCanada(.get, nil).requestType
@@ -49,6 +56,8 @@ struct NetworkService: NetworkServiceInterface {
 
 protocol NetworkSession {
     func loadData<T: Codable>(from request: URLRequest, completion: @escaping ((Result<T, AppNetworkError>) -> Void))
+    
+    func loadImageData(from imageUrl: URL, completion: @escaping ((Result<UIImage, AppNetworkError>) -> Void))
 }
 
 extension URLSession: NetworkSession {
@@ -93,5 +102,27 @@ extension URLSession: NetworkSession {
             }
         }
         task.resume()
+    }
+    
+    
+    func loadImageData(
+        from imageUrl: URL,
+        completion: @escaping ((Result<UIImage, AppNetworkError>) -> Void)
+    ) {
+        
+        let task = dataTask(with: imageUrl) { imageData, urlResponse, error in
+            guard
+                let imageData = imageData,
+                let image = UIImage(data: imageData),
+                error == nil
+            else {
+                completion(.failure(.imageNotLoaded))
+                return
+            }
+            completion(.success(image))
+        }
+        
+        task.resume()
+        
     }
 }

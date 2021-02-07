@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		944C179C25CF8E4900154F80 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C179B25CF8E4900154F80 /* ImageCache.swift */; };
+		944C17A025CF907C00154F80 /* UIImageView+Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C179F25CF907C00154F80 /* UIImageView+Download.swift */; };
 		949255C425CE6814005484A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949255C325CE6814005484A7 /* AppDelegate.swift */; };
 		949255C625CE6814005484A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949255C525CE6814005484A7 /* SceneDelegate.swift */; };
 		949255CB25CE6814005484A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 949255C925CE6814005484A7 /* Main.storyboard */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		944C179B25CF8E4900154F80 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		944C179F25CF907C00154F80 /* UIImageView+Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Download.swift"; sourceTree = "<group>"; };
 		949255C025CE6814005484A7 /* CanadaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CanadaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		949255C325CE6814005484A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		949255C525CE6814005484A7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 				9492560625CE73EB005484A7 /* AppUtils.swift */,
 				9492562125CEA828005484A7 /* AppNetworkError.swift */,
 				9492563E25CEBB97005484A7 /* DataBinding.swift */,
+				944C179B25CF8E4900154F80 /* ImageCache.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -194,6 +199,7 @@
 			children = (
 				9492560C25CE74FD005484A7 /* UIView+Autolayout.swift */,
 				9492561825CE8662005484A7 /* Protocol+Depencency.swift */,
+				944C179F25CF907C00154F80 /* UIImageView+Download.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -352,6 +358,8 @@
 				949255C425CE6814005484A7 /* AppDelegate.swift in Sources */,
 				9492563725CEB747005484A7 /* AboutCanada.swift in Sources */,
 				949255C625CE6814005484A7 /* SceneDelegate.swift in Sources */,
+				944C17A025CF907C00154F80 /* UIImageView+Download.swift in Sources */,
+				944C179C25CF8E4900154F80 /* ImageCache.swift in Sources */,
 				9492561125CE81FB005484A7 /* HomeTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

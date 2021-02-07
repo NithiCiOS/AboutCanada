@@ -21,6 +21,8 @@ enum AppNetworkError: Error {
     
     case responseError(Error)
     
+    case imageNotLoaded
+    
     var description: String {
         switch self {
             case .jsonNotLoaded, .decodingProblem:
@@ -36,7 +38,13 @@ enum AppNetworkError: Error {
                 return "Unknown issue"
                 
             case .responseError (let error):
+                #if DEBUG
+                print(error)
+                #endif
                 return error.localizedDescription
+                
+            case .imageNotLoaded:
+                return "Image is not downloaded."
         }
     }
     
