@@ -7,15 +7,24 @@
 
 import UIKit
 
+/**
+ *  A custom `UITableViewCell` that displays the details about canada.
+ *
+ *  - seeAlso: `thumpImageView`
+ *  - seeAlso: `titleLabel`
+ *  - seeAlso: `descriptionLabel`
+ */
 class CanadaInfoCell: UITableViewCell {
     static let reuseId = String(describing: CanadaInfoCell.self)
     
+    /// `UIImageView` represents the icon imageview holder.
     let thumpImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
         return imageView
     }()
     
+    /// `UILabel` represents the title about the detail.
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 18)
@@ -23,6 +32,7 @@ class CanadaInfoCell: UITableViewCell {
         return label
     }()
     
+    /// `UILabel` represents the description detail.
     let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .italicSystemFont(ofSize: 14)
@@ -31,6 +41,10 @@ class CanadaInfoCell: UITableViewCell {
         return label
     }()
     
+    /// Initializer of cell.
+    /// - Parameters:
+    ///   - style: `CellStyle` of this tableViewCell.
+    ///   - reuseIdentifier: `String` represents the reuse identifier.
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
@@ -43,6 +57,7 @@ class CanadaInfoCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// Prepares the icon imageview.
     func setupImageView() {
         addSubview(thumpImageView)
         thumpImageView.backgroundColor = .lightGray
@@ -56,6 +71,7 @@ class CanadaInfoCell: UITableViewCell {
         thumpImageView.image = UIImage(named: "placeholder")
     }
     
+    /// Prepares the title label.
     func setupTitleLabel() {
         addSubview(titleLabel)
         titleLabel.setupAnchors(
@@ -67,6 +83,7 @@ class CanadaInfoCell: UITableViewCell {
         )
     }
     
+    /// Prepares the description label.
     func setupDescriptionLabel() {
         addSubview(descriptionLabel)
         descriptionLabel.setupAnchors(
@@ -78,7 +95,7 @@ class CanadaInfoCell: UITableViewCell {
         )
     }
     
-    
+    /// `CanadaDetail` represents the feed data of cell.
     var canadaDetail: CanadaDetail? {
         didSet {
             self.thumpImageView.getImage(from: canadaDetail?.imageHref)

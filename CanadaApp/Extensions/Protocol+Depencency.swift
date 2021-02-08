@@ -14,11 +14,13 @@ protocol ServiceDependency {
     init(with service: Service)
 }
 
+/// Controller dependency with ViewModel.
 protocol ControllerDependency {
     associatedtype ViewModel
     var viewModel: ViewModel! { get set }
 }
 
+/// An extension that sets the dependent view model to the controller.
 extension ControllerDependency where Self: UIViewController {
     static func instantiate(viewModel: ViewModel) -> Self {
         var controller = Self()

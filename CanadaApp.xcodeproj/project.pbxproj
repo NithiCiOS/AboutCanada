@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		944C179C25CF8E4900154F80 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C179B25CF8E4900154F80 /* ImageCache.swift */; };
 		944C17A025CF907C00154F80 /* UIImageView+Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C179F25CF907C00154F80 /* UIImageView+Download.swift */; };
+		944C17A625CFFAAF00154F80 /* URLSession+NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C17A525CFFAAF00154F80 /* URLSession+NetworkSession.swift */; };
+		944C17AA25D1B6D500154F80 /* UIVIewController+Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C17A925D1B6D500154F80 /* UIVIewController+Reachability.swift */; };
+		944C17AE25D1BC2700154F80 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944C17AD25D1BC2700154F80 /* NetworkServiceTests.swift */; };
 		949255C425CE6814005484A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949255C325CE6814005484A7 /* AppDelegate.swift */; };
 		949255C625CE6814005484A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949255C525CE6814005484A7 /* SceneDelegate.swift */; };
 		949255CB25CE6814005484A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 949255C925CE6814005484A7 /* Main.storyboard */; };
@@ -42,6 +45,9 @@
 /* Begin PBXFileReference section */
 		944C179B25CF8E4900154F80 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		944C179F25CF907C00154F80 /* UIImageView+Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Download.swift"; sourceTree = "<group>"; };
+		944C17A525CFFAAF00154F80 /* URLSession+NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+NetworkSession.swift"; sourceTree = "<group>"; };
+		944C17A925D1B6D500154F80 /* UIVIewController+Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIewController+Reachability.swift"; sourceTree = "<group>"; };
+		944C17AD25D1BC2700154F80 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
 		949255C025CE6814005484A7 /* CanadaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CanadaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		949255C325CE6814005484A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		949255C525CE6814005484A7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -200,6 +206,8 @@
 				9492560C25CE74FD005484A7 /* UIView+Autolayout.swift */,
 				9492561825CE8662005484A7 /* Protocol+Depencency.swift */,
 				944C179F25CF907C00154F80 /* UIImageView+Download.swift */,
+				944C17A525CFFAAF00154F80 /* URLSession+NetworkSession.swift */,
+				944C17A925D1B6D500154F80 /* UIVIewController+Reachability.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -218,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				9492562625CEA87A005484A7 /* Mock */,
+				944C17AD25D1BC2700154F80 /* NetworkServiceTests.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -356,6 +365,8 @@
 				9492562F25CEAA78005484A7 /* NetworkRequest.swift in Sources */,
 				9492561925CE8662005484A7 /* Protocol+Depencency.swift in Sources */,
 				949255C425CE6814005484A7 /* AppDelegate.swift in Sources */,
+				944C17AA25D1B6D500154F80 /* UIVIewController+Reachability.swift in Sources */,
+				944C17A625CFFAAF00154F80 /* URLSession+NetworkSession.swift in Sources */,
 				9492563725CEB747005484A7 /* AboutCanada.swift in Sources */,
 				949255C625CE6814005484A7 /* SceneDelegate.swift in Sources */,
 				944C17A025CF907C00154F80 /* UIImageView+Download.swift in Sources */,
@@ -369,6 +380,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				949255DB25CE6816005484A7 /* CanadaAppTests.swift in Sources */,
+				944C17AE25D1BC2700154F80 /* NetworkServiceTests.swift in Sources */,
 				9492562825CEA890005484A7 /* MockNetworkSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

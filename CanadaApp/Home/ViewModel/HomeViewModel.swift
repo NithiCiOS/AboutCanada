@@ -25,20 +25,37 @@ extension HomeViewModelInterface {
         self.init(with: service)
     }
 }
+// MARK: - HomeViewModel
 
+/**
+ * A `HomeViewModel`, that supplies the required data model to the controller.
+ */
 final class HomeViewModel: HomeViewModelInterface {
+    
+    // MARK: - Instance Variable
+    
+    /// `NetworkServiceInterface` represents the service that has been used by this viewmodel.
     var service: NetworkServiceInterface
     
+    /// An array of Observer.
     var canadaDetails: DataBinding<[CanadaDetail]>
     
+    /// `String` represents the title of navigation bar.
     var navBarTitle: String?
     
+    // MARK: - Methods
+    
+    /// Initializer
+    /// - Parameter service: `NetworkServiceInterface` mock service is also can be inject here.
     init(with service: NetworkServiceInterface) {
         self.service = service
         self.canadaDetails = DataBinding<[CanadaDetail]>()
         self.getDetail()
     }
     
+    // MARK: - Custom method.
+    
+    /// Get the detail of about canada.
     func getDetail() {
         self.service.getAboutCanada { [weak self] result in
             guard
@@ -56,5 +73,4 @@ final class HomeViewModel: HomeViewModelInterface {
             weakSelf.navBarTitle = detail.about
         }
     }
-    
 }

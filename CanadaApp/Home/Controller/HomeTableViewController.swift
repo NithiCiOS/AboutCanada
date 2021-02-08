@@ -17,8 +17,9 @@ class HomeTableViewController: UITableViewController, ControllerDependency {
         super.viewDidLoad()
         self.prepareTableView()
         self.setupNavBarTitle()
-        
+        self.showNoInternetView()
     }
+    
     private func setupNavBarTitle() {
         self.navigationItem.title = self.viewModel.navBarTitle
     }

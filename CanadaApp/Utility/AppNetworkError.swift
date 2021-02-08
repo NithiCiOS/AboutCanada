@@ -23,6 +23,8 @@ enum AppNetworkError: Error {
     
     case imageNotLoaded
     
+    case noInternet
+    
     var description: String {
         switch self {
             case .jsonNotLoaded, .decodingProblem:
@@ -45,6 +47,9 @@ enum AppNetworkError: Error {
                 
             case .imageNotLoaded:
                 return "Image is not downloaded."
+            
+            case .noInternet:
+                return "Internet connection appears to be offline."
         }
     }
     

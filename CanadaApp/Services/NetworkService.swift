@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 protocol NetworkServiceInterface {
     init(session: NetworkSession)
@@ -51,78 +50,5 @@ struct NetworkService: NetworkServiceInterface {
                     completion(nil)
             }
         }
-    }
-}
-
-protocol NetworkSession {
-    func loadData<T: Codable>(from request: URLRequest, completion: @escaping ((Result<T, AppNetworkError>) -> Void))
-    
-    func loadImageData(from imageUrl: URL, completion: @escaping ((Result<UIImage, AppNetworkError>) -> Void))
-}
-
-extension URLSession: NetworkSession {
-    func loadData<T: Codable>(
-        from request: URLRequest,
-        completion: @escaping ((Result<T, AppNetworkError>) -> Void)) {
-        let task = dataTask(with: request) { networkData, response, error in
-            guard
-                let response = response as? HTTPURLResponse,
-                error == nil
-            else {
-                if let error = error {
-                    completion(.failure(.responseError(error)))
-                    return
-                }
-                completion(.failure(.unknown))
-                return
-            }
-            
-            switch response.statusCode {
-                /// Generally a success response.
-                /// Some times server response throws 200, but validation may be fails.
-                /// In that scenario we have to prepare the repective model to handle that.
-                case 200...299:
-                    if let data = networkData,
-                       let latin1String = String(data: data, encoding: .isoLatin1),
-                       let latin1Data = latin1String.data(using: .utf8, allowLossyConversion: true),
-                       let responseModel = try? JSONDecoder().decode(T.self, from: latin1Data) {
-                        completion(.success(responseModel))
-                        return
-                    }
-                    completion(.failure(.decodingProblem))
-                    
-                case 300...399: // Error in request.
-                    completion(.failure(.requestNotFullFill))
-                    
-                case 400...600: // Server error.
-                    completion(.failure(.serverOutOfService))
-                    
-                default:
-                    completion(.failure(.unknown))
-            }
-        }
-        task.resume()
-    }
-    
-    
-    func loadImageData(
-        from imageUrl: URL,
-        completion: @escaping ((Result<UIImage, AppNetworkError>) -> Void)
-    ) {
-        
-        let task = dataTask(with: imageUrl) { imageData, urlResponse, error in
-            guard
-                let imageData = imageData,
-                let image = UIImage(data: imageData),
-                error == nil
-            else {
-                completion(.failure(.imageNotLoaded))
-                return
-            }
-            completion(.success(image))
-        }
-        
-        task.resume()
-        
     }
 }

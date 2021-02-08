@@ -3,4 +3,54 @@
    uuid = "4EBD17AF-8E76-4760-9748-DC0F0D8BF0EF"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D01DFD7A-6D7D-45DB-8438-EEFBEED3FC7B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CanadaApp/Extensions/UIImageView+Download.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "getImage(from:session:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D01DFD7A-6D7D-45DB-8438-EEFBEED3FC7B - 2ef27b42071d5e06"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(extension in CanadaApp):__C.UIImageView.getImage(from: Swift.Optional&lt;Swift.String&gt;, session: CanadaApp.NetworkSession) -&gt; ()"
+                  moduleName = "CanadaApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cvn/Desktop/CanadaApp/CanadaApp/Extensions/UIImageView+Download.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "1467">
+               </Location>
+               <Location
+                  uuid = "D01DFD7A-6D7D-45DB-8438-EEFBEED3FC7B - 9d6b369ed3353e64"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Result&lt;__C.UIImage, CanadaApp.AppNetworkError&gt;) -&gt; () in (extension in CanadaApp):__C.UIImageView.getImage(from: Swift.Optional&lt;Swift.String&gt;, session: CanadaApp.NetworkSession) -&gt; ()"
+                  moduleName = "CanadaApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cvn/Desktop/CanadaApp/CanadaApp/Extensions/UIImageView+Download.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "317">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
