@@ -18,6 +18,7 @@ class HomeTableViewController: UITableViewController, ControllerDependency {
         self.prepareTableView()
         self.setupNavBarTitle()
         self.showNoInternetView()
+        self.observeTableViewRefresh()
     }
     
     private func setupNavBarTitle() {
@@ -27,6 +28,19 @@ class HomeTableViewController: UITableViewController, ControllerDependency {
     private func prepareTableView() {
         self.tableView.register(CanadaInfoCell.self, forCellReuseIdentifier: CanadaInfoCell.reuseId)
         self.tableView.estimatedRowHeight = 100
+    }
+    
+    private func observeTableViewRefresh() {
+        self.viewModel.refreshTableView.bind { [weak self] refresh in
+            if let refreshView = refresh, refreshView {
+                DispatchQueue.main.async { [weak self] in
+                    // Avoid one more reference count.
+                    guard let weakSelf = self else { return }
+                    weakSelf.tableView.reloadData()
+                    weakSelf.setupNavBarTitle()
+                }
+            }
+        }
     }
 }
 

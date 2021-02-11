@@ -15,6 +15,8 @@ protocol HomeViewModelInterface: AnyObject {
     
     var canadaDetails: DataBinding<[CanadaDetail]> { get set }
     
+    var refreshTableView: DataBinding<Bool> { get set }
+    
     init(with service: NetworkServiceInterface)
     
     func getDetail()
@@ -40,6 +42,9 @@ final class HomeViewModel: HomeViewModelInterface {
     /// An array of Observer.
     var canadaDetails: DataBinding<[CanadaDetail]>
     
+    /// Refresh the tableview when async network call was completed.
+    var refreshTableView: DataBinding<Bool>
+    
     /// `String` represents the title of navigation bar.
     var navBarTitle: String?
     
@@ -49,6 +54,7 @@ final class HomeViewModel: HomeViewModelInterface {
     /// - Parameter service: `NetworkServiceInterface` mock service is also can be inject here.
     init(with service: NetworkServiceInterface) {
         self.service = service
+        self.refreshTableView = DataBinding<Bool>()
         self.canadaDetails = DataBinding<[CanadaDetail]>()
         self.getDetail()
     }
@@ -71,6 +77,7 @@ final class HomeViewModel: HomeViewModelInterface {
             }
             weakSelf.canadaDetails.value = filteredRows
             weakSelf.navBarTitle = detail.about
+            weakSelf.refreshTableView.value = true
         }
     }
 }

@@ -21,5 +21,8 @@ enum AppUtils {
         
         /// Screen width
         static let width = UIScreen.main.bounds.width
+        
+        /// Screen bounds
+        static let bounds = UIScreen.main.bounds
     }
 }
