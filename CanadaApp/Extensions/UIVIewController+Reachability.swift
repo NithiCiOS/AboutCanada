@@ -8,8 +8,9 @@
 import UIKit
 
 extension UIViewController {
-    
+
     func showNoInternetView() {
+        
         let navigationView = self.navigationController?.view ?? self.view
         
         guard let displayView = navigationView else { return }
@@ -33,17 +34,22 @@ extension UIViewController {
                 size: .init(width: 0, height: 30)
             )
             displayView.bringSubviewToFront(networkLabel)
-            networkLabel.isHidden = ConnectionObserver.shared.reachability.value ?? true
+            networkLabel.isHidden = ConnectionObserver.shared.isConnected
         }
-        
-        ConnectionObserver.shared.reachability.bind { reachability in
-            if let reach = reachability {
-                DispatchQueue.main.async {
-                    // Get the exact view in extension.
-                    let noInternetLabel = displayView.subviews.first(where: { $0.tag == 1001 })
-                    noInternetLabel?.isHidden = reach
-                }
-            }
+    }
+    
+    /// Hide or shows the network not available label.
+    func showTheLabel(_ show: Bool) {
+        print("showww ==", show)
+        // Observed NWPath delay here.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            let navigationView = self.navigationController?.view ?? self.view
+            
+            guard let displayView = navigationView else { return }
+            
+            // Get the exact view in extension.
+            let noInternetLabel = displayView.subviews.first(where: { $0.tag == 1001 })
+            noInternetLabel?.isHidden = show
         }
     }
 }

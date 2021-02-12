@@ -19,8 +19,7 @@ extension URLSession: NetworkSession {
         from request: URLRequest,
         completion: @escaping ((Result<T, AppNetworkError>) -> Void)) {
         
-        if let hasConnection = ConnectionObserver.shared.reachability.value,
-           !hasConnection {
+        if !ConnectionObserver.shared.isConnected {
             completion(.failure(.noInternet))
             return
         }
@@ -90,30 +89,83 @@ extension URLSession: NetworkSession {
 import Network
 
 final class ConnectionObserver {
+    
+    // MARK: - Properties
+    
     static let shared = ConnectionObserver()
     
-    let reachability = DataBinding<Bool>()
+    var monitor: NWPathMonitor?
     
-    private var networkMonitor: NWPathMonitor!
-     
+    var isMonitoring = false
+    
+    var didStartMonitoringHandler: (() -> Void)?
+    
+    var didStopMonitoringHandler: (() -> Void)?
+    
+    var netStatusChangeHandler: (() -> Void)?
+    
+    
+    var isConnected: Bool {
+        guard let monitor = monitor else { return false }
+        return monitor.currentPath.status == .satisfied
+    }
+    
+    
+    var interfaceType: NWInterface.InterfaceType? {
+        guard let monitor = monitor else { return nil }
+        
+        return monitor.currentPath.availableInterfaces.filter {
+            monitor.currentPath.usesInterfaceType($0.type) }.first?.type
+    }
+    
+    
+    var availableInterfacesTypes: [NWInterface.InterfaceType]? {
+        guard let monitor = monitor else { return nil }
+        return monitor.currentPath.availableInterfaces.map { $0.type }
+    }
+    
+    
+    var isExpensive: Bool {
+        return monitor?.currentPath.isExpensive ?? false
+    }
+    
+    
+    // MARK: - Init & Deinit
+    
     private init() {
-        networkMonitor = NWPathMonitor()
         startMonitoring()
     }
     
-    private func startMonitoring() {
-        networkMonitor.pathUpdateHandler = { [weak self] path in
-            guard let weakSelf = self else { return }
-            switch path.status {
-                case .satisfied, .unsatisfied:
-                    weakSelf.reachability.value = true
-                case .requiresConnection:
-                    weakSelf.reachability.value = false
-                @unknown default:
-                    weakSelf.reachability.value = false
-            }
-        }
-        let queue = DispatchQueue.global(qos: .background)
-        networkMonitor.start(queue: queue)
+    
+    deinit {
+        stopMonitoring()
     }
+    
+    
+    // MARK: - Method Implementation
+    
+    func startMonitoring() {
+        guard !isMonitoring else { return }
+        
+        monitor = NWPathMonitor()
+        let queue = DispatchQueue(label: "NetStatus_Monitor")
+        monitor?.start(queue: queue)
+        
+        monitor?.pathUpdateHandler = { _ in
+            self.netStatusChangeHandler?()
+        }
+        
+        isMonitoring = true
+        didStartMonitoringHandler?()
+    }
+    
+    
+    func stopMonitoring() {
+        guard isMonitoring, let monitor = monitor else { return }
+        monitor.cancel()
+        self.monitor = nil
+        isMonitoring = false
+        didStopMonitoringHandler?()
+    }
+    
 }

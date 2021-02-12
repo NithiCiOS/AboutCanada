@@ -15,10 +15,11 @@ class HomeTableViewController: UITableViewController, ControllerDependency {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.showNoInternetView()
         self.prepareTableView()
         self.setupNavBarTitle()
-        self.showNoInternetView()
         self.observeTableViewRefresh()
+        self.reloadInfo()
     }
     
     private func setupNavBarTitle() {
@@ -40,6 +41,16 @@ class HomeTableViewController: UITableViewController, ControllerDependency {
                     weakSelf.setupNavBarTitle()
                 }
             }
+        }
+    }
+    
+    private func reloadInfo() {
+        ConnectionObserver.shared.netStatusChangeHandler = { [unowned self] in
+            print("ObserverObserver")
+            if ConnectionObserver.shared.isConnected {
+                self.viewModel.getDetail()
+            }
+            self.showTheLabel(ConnectionObserver.shared.isConnected)
         }
     }
 }
