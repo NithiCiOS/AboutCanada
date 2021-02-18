@@ -8,48 +8,34 @@
 import UIKit
 
 extension UIViewController {
-
-    func showNoInternetView() {
-        
-        let navigationView = self.navigationController?.view ?? self.view
-        
-        guard let displayView = navigationView else { return }
-        
-        // Avoid duplication
-        let noInternetLabel = displayView.subviews.first(where: { $0.tag == 1001 })
-        
-        if noInternetLabel == nil {
-            let networkLabel = UILabel()
-            networkLabel.tag = 1001
-            networkLabel.text = "Internet is not available."
-            networkLabel.font = .boldSystemFont(ofSize: 20)
-            networkLabel.textColor = .white
-            networkLabel.textAlignment = .center
-            networkLabel.backgroundColor = .red
-            displayView.addSubview(networkLabel)
-            networkLabel.setupAnchors(
-                top: displayView.topAnchor,
-                trailing: displayView.trailingAnchor,
-                leading: displayView.leadingAnchor,
-                size: .init(width: 0, height: 30)
-            )
-            displayView.bringSubviewToFront(networkLabel)
-            networkLabel.isHidden = ConnectionObserver.shared.isConnected
-        }
+    
+    /// Computational property support to get the network label at the extentioal level.
+    func noNetworkLabel() -> UILabel {
+        let networkLabel = UILabel()
+        networkLabel.tag = 1001
+        networkLabel.text = "Internet is not available."
+        networkLabel.font = .boldSystemFont(ofSize: 20)
+        networkLabel.textColor = .red
+        networkLabel.textAlignment = .center
+        return networkLabel
     }
     
-    /// Hide or shows the network not available label.
-    func showTheLabel(_ show: Bool) {
-        print("showww ==", show)
-        // Observed NWPath delay here.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            let navigationView = self.navigationController?.view ?? self.view
-            
-            guard let displayView = navigationView else { return }
-            
-            // Get the exact view in extension.
-            let noInternetLabel = displayView.subviews.first(where: { $0.tag == 1001 })
-            noInternetLabel?.isHidden = show
+    /// This is an additional execution of `UIViewController`.
+    /// Hence we can re-use this for all the UIViewcontrollers.
+    func showNoInternetView() {
+        guard let _ = self.navigationController else { return }
+        // Execute during view load
+        updateNavigationBar()
+    }
+    
+    /// Observe the connection status, and decides to show or remove.
+    func updateNavigationBar() {
+        DispatchQueue.main.async {
+            if ConnectionObserver.shared.isConnected {
+                self.navigationItem.titleView = nil
+            } else {
+                self.navigationItem.titleView = self.noNetworkLabel()
+            }
         }
     }
 }

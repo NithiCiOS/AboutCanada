@@ -46,11 +46,10 @@ class HomeTableViewController: UITableViewController, ControllerDependency {
     
     private func reloadInfo() {
         ConnectionObserver.shared.netStatusChangeHandler = { [unowned self] in
-            print("ObserverObserver")
+            self.updateNavigationBar()
             if ConnectionObserver.shared.isConnected {
                 self.viewModel.getDetail()
             }
-            self.showTheLabel(ConnectionObserver.shared.isConnected)
         }
     }
 }
